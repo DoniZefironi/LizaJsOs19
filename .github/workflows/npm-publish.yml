@@ -1,24 +1,24 @@
-name: Node.js CI
+name: Node.js CI  # Название workflow
 
-on:
+on:  # Триггеры запуска
   push:
-    branches: [ "main" ]
+    branches: [ "main" ]  # При пуше в main
   pull_request:
-    branches: [ "main" ]
+    branches: [ "main" ]  # Или при PR в main
 
 jobs:
   test:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest  # ОС для запуска
 
     strategy:
       matrix:
-        node-version: [16.x, 18.x]
+        node-version: [16.x, 18.x]  # Тестирование на Node.js 16 и 18
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v3  # Клонирует репозиторий
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v3
       with:
-        node-version: ${{ matrix.node-version }}
-    - run: npm ci
-    - run: npm test
+        node-version: ${{ matrix.node-version }}  # Устанавливает нужную версию Node.js
+    - run: npm ci  # Чистая установка зависимостей
+    - run: npm test  # Запуск тестов
